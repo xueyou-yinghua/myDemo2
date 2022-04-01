@@ -2,6 +2,7 @@ import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 
 const main = ()=>import('../views/sk-main/sk-main.vue');
 const list = ()=>import('../views/list/mine.vue');
+const notFound = ()=>import('../views/list/notFound.vue');
 
 /**
  * 1. 动态路由
@@ -31,11 +32,16 @@ const routes:RouteRecordRaw[] = [
       name:'测试',
     },
     component:list,
-
-    children:[
-
-    ]
   },
+  //捕获所有路由或者404Not found路由
+  {
+    path:'/:pathMatch(.*)*',
+    name:'notFound',
+    meta:{
+      name:'未找到该页面',
+    },
+    component:notFound,
+  }
 ];
 
 const router = createRouter({
@@ -44,11 +50,12 @@ const router = createRouter({
 
 });
 
-router.beforeEach((to, from, next) => {
+//全局前置钩子
+router.beforeEach( (to, from) => {
+})
+//全局后置钩子
+router.afterEach((to, from) => {
   document.title = to.meta.name? (to.meta.name as string): '加载中...';
-
-
-  next();
 })
 
 
