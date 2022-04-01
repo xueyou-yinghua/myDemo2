@@ -3,6 +3,7 @@ import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 const main = ()=>import('../views/sk-main/sk-main.vue');
 const list = ()=>import('../views/list/mine.vue');
 const notFound = ()=>import('../views/list/notFound.vue');
+const one = 123;
 
 /**
  * 1. 动态路由
