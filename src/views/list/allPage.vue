@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-
 </script>
 
 
 <template>
-  <router-view/>
+  多项页面 <br>
+  {{$route.params.chapters}}
 </template>

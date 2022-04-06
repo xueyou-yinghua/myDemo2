@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-
 </script>
 
 
 <template>
-  <router-view/>
+  <h1>这是中间</h1>
 </template>
