@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
+import {createRouter, createWebHistory, RouteRecordRaw,RouteLocationNormalizedLoaded} from 'vue-router';
 
 const main = ()=>import('../views/sk-main/sk-main.vue');
 const list = ()=>import('../views/list/mine.vue');
@@ -109,9 +109,10 @@ const routes:RouteRecordRaw[] = [
   {
     path:'/user/:id',
     component:props_user,
-    props:{
-      id:123,
-    },
+    props: {
+      id: 123,
+      fun: (route: RouteLocationNormalizedLoaded) => ({query: route.query.value}),
+    }
   }
 ];
 
