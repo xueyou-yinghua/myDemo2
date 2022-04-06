@@ -10,6 +10,7 @@ const manyPages_left = ()=>import('../views/list/manyPages/left.vue');
 const manyPages_center = ()=>import('../views/list/manyPages/center.vue');
 const manyPages_main = ()=>import('../views/list/manyPages/main.vue');
 const manyPages_main1 = ()=>import('../views/list/manyPages/main1.vue');
+const props_user = ()=>import('../views/list/props/user.vue');
 
 
 /**
@@ -24,6 +25,9 @@ const routes:RouteRecordRaw[] = [
     name:'main',
     meta:{
       name:'首页',
+    },
+    redirect:{
+      name:'homepage'
     },
 
     component:main,
@@ -100,6 +104,15 @@ const routes:RouteRecordRaw[] = [
       }
     ]
   },
+
+  //将props传递给路由组件
+  {
+    path:'/user/:id',
+    component:props_user,
+    props:{
+      id:123,
+    },
+  }
 ];
 
 const router = createRouter({
