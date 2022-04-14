@@ -11,7 +11,10 @@ const manyPages_center = ()=>import('../views/list/manyPages/center.vue');
 const manyPages_main = ()=>import('../views/list/manyPages/main.vue');
 const manyPages_main1 = ()=>import('../views/list/manyPages/main1.vue');
 const props_user = ()=>import('../views/list/props/user.vue');
-
+const guard = ()=>import('../views/list/guard/guard.vue');
+const guard1 = ()=>import('../views/list/guard/1.vue');
+const guard2 = ()=>import('../views/list/guard/2.vue');
+const guard3 = ()=>import('../views/list/guard/3.vue');
 
 /**
  * 1. 动态路由
@@ -26,9 +29,9 @@ const routes:RouteRecordRaw[] = [
     meta:{
       name:'首页',
     },
-    redirect:{
+/*    redirect:{
       name:'homepage'
-    },
+    },*/
 
     component:main,
 
@@ -113,6 +116,59 @@ const routes:RouteRecordRaw[] = [
       id: 123,
       fun: (route: RouteLocationNormalizedLoaded) => ({query: route.query.value}),
     }
+  },
+
+  //路由独享守卫
+  {
+    path: '/guard',
+    component: guard,
+    name: 'guard',
+    meta: {
+      name: '守卫',
+    },
+    //实现以下1跳到2失败,2跳到3失败,3跳到1失败
+    //1可以跳到3,,2可以跳到1,3可以跳到2
+    children:[
+      {
+        path: '/1',
+        component: guard1,
+        name: 'guard1',
+        meta: {
+          name: '守卫1',
+        },
+        beforeEnter:(to,from) => {
+          if(from.name === 'guard3')
+            //这个失败会导致页面路由不会变化
+            return false;
+        }
+      },
+      {
+        path: '/2',
+        component: guard2,
+        name: 'guard2',
+        meta: {
+          name: '守卫2',
+        },
+        beforeEnter:(to,from) => {
+          if(from.name === 'guard1')
+            //这个失败会导致页面路由不会变化
+            return false;
+        }
+      },
+      {
+        path: '/3',
+        component: guard3,
+        name: 'guard3',
+        meta: {
+          name: '守卫3',
+        },
+        beforeEnter:(to,from) => {
+          if(from.name === 'guard2')
+            //这个失败会导致页面路由不会变化
+            return false;
+        }
+      }
+    ]
   }
 ];
 
@@ -122,12 +178,18 @@ const router = createRouter({
 
 });
 
-//全局前置钩子
+//全局前置钩子   全局前置守卫
 router.beforeEach( (to, from) => {
 })
-//全局后置钩子
-router.afterEach((to, from) => {
+
+//全局解析守卫   获取数据或执行任何其他操作（如果用户无法进入页面时你希望避免执行的操作）的理想位置。
+router.beforeResolve(async to=>{
   document.title = to.meta.name? (to.meta.name as string): '加载中...';
+})
+
+//全局后置钩子  对于分析、更改页面标题、声明页面等辅助功能以及许多其他事情都很有用
+router.afterEach((to, from) => {
+  //document.title = to.meta.name? (to.meta.name as string): '加载中...';
 })
 
 
