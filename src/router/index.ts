@@ -12,9 +12,10 @@ const manyPages_main = ()=>import('../views/list/manyPages/main.vue');
 const manyPages_main1 = ()=>import('../views/list/manyPages/main1.vue');
 const props_user = ()=>import('../views/list/props/user.vue');
 const guard = ()=>import('../views/list/guard/guard.vue');
-const guard1 = ()=>import('../views/list/guard/1.vue');
-const guard2 = ()=>import('../views/list/guard/2.vue');
-const guard3 = ()=>import('../views/list/guard/3.vue');
+const guard1 = ()=>import('../views/list/guard/one.vue');
+const guard2 = ()=>import('../views/list/guard/two.vue');
+const guard3 = ()=>import('../views/list/guard/three.vue');
+const guard4 = ()=>import('../views/list/guard/four.vue');
 
 /**
  * 1. 动态路由
@@ -78,7 +79,7 @@ const routes:RouteRecordRaw[] = [
   },
   //* 在技术上也标志着一个参数是可选的，但 ? 参数不能重复。
 
-  //想同事展示多个视图不是嵌套展示    用到命名视图
+  //想同时展示多个视图不是嵌套展示    用到命名视图
   {
     path:'/manyPages',
     component:manyPages_main,
@@ -166,7 +167,16 @@ const routes:RouteRecordRaw[] = [
           if(from.name === 'guard2')
             //这个失败会导致页面路由不会变化
             return false;
+          to.params = {path:from.path};
         }
+      },
+      {
+        path: '/4',
+        component: guard4,
+        name: 'guard4',
+        meta: {
+          name: '守卫4',
+        },
       }
     ]
   }
@@ -178,8 +188,10 @@ const router = createRouter({
 
 });
 
+//先全局守卫然后单个守卫
 //全局前置钩子   全局前置守卫
 router.beforeEach( (to, from) => {
+
 })
 
 //全局解析守卫   获取数据或执行任何其他操作（如果用户无法进入页面时你希望避免执行的操作）的理想位置。

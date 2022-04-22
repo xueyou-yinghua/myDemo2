@@ -32,7 +32,7 @@
 
 ### 最后创建了一下文件
 ####其中文件夹有
-> <span style="color:#c7ac5f">views(总视图文件夹): <span style="color:#51a7dc"> src/views <br>
+> <span style="color:#c7ac5f">views(总视图文件夹): <span style="color:#51a7dc"> https://github.com/xueyou-yinghua/myDemo2/tree/master/src/views <br>
 > <span style="color:#c7ac5f">list(所有在学习中实现的功能与测试文件所在的文件夹): <span style="color:#51a7dc"> src/views/list <br>
 > <span style="color:#c7ac5f">sk-home(sk-main首页如果路由在/的情况下的页面): <span style="color:#51a7dc"> src/views/sk-home <br>
 > <span style="color:#c7ac5f">sk-main(主页): <span style="color:#51a7dc"> src/views/sk-main <br>
