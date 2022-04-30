@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-
-
 import {defineProps} from "vue";
-import {RouteLocationNormalizedLoaded} from 'vue-router';
+import {RouteLocationNormalizedLoaded, useRoute} from 'vue-router';
+
+const route = useRoute();
 
 const props = defineProps({
   id:{
@@ -14,6 +14,8 @@ const props = defineProps({
     default:(id: RouteLocationNormalizedLoaded)=>id
   }
 })
+
+console.log(props.fun(route));
 </script>
 
 
