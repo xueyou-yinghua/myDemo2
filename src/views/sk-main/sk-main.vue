@@ -5,7 +5,7 @@ import {useRouter} from "vue-router";
 const router = useRouter();
 
 const click = ()=>{
-  router.push('/guard')
+  router.push('/updateNav/child1')
 }
 </script>
 

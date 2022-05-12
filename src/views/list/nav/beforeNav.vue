@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import Loading from "../loading.vue";
-import {reactive, ref,watch} from "vue";
+import {onMounted, reactive, ref, watch} from "vue";
 import Error from "../error.vue";
+import {useRoute} from "vue-router";
+
+const route = useRoute();
 
 type p_type = {
   loading: boolean,
@@ -15,8 +18,7 @@ const params = reactive<p_type>({
   error: null,
 })
 
-const num = ref('');
-const index = ref(0);
+const num = ref(route.query.num);
 
 function getData() {
   console.log("开始查询!");
@@ -34,8 +36,14 @@ function getData() {
   })
 }
 
-let time = 0;
+onMounted(async ()=>{
+  await getData();
+  params.loading = false;
+  console.log('查询完毕')
+})
 
+/*let time = 0;
+const index = ref(0);
 watch(num,(newVal,oldVal)=>{
   console.log(1);
   index.value = 1;
@@ -51,15 +59,16 @@ watch(index,async (newVal,oldVal)=>{
     await getData();
     params.loading = false;
   }
-})
+})*/
 
+
+//这是用于 导航完成后获取数据
 
 </script>
 
 
 <template>
   <div class="post">
-    <input type="text" v-model="num">
     <Loading :is-watch = "params.loading"></Loading>
     <Error :is-watch="params.error!==null">
       {{params.error}}

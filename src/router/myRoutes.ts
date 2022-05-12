@@ -236,6 +236,9 @@ const routeMeta:RouteRecordRaw = {
 
 const beforeNavigation = ()=>import('../views/list/nav/beforeNav.vue');
 const afterNavigation = ()=>import('../views/list/nav/afterNav.vue');
+const updateNavigation = ()=>import('../views/list/nav/updateNav.vue');
+const child1 = ()=>import('../views/list/nav/children1.vue');
+const child2 = ()=>import('../views/list/nav/children2.vue');
 /**
  * 8. 数据获取
  *    有时候，进入某个路由后，需要从服务器获取数据。例如，在渲染用户信息时，你需要从服务器获取用户的数据。我们可以通过两种方式来实现：
@@ -251,11 +254,44 @@ const navs:RouteRecordRaw[] = [
     name:'beforeNav',
     path:'/beforeNav',
     meta:{
-      name:'提前路由',
+      name:'导航后路由',
     },
     component:beforeNavigation,
   },
-
+  {
+    name:'afterNav',
+    path:'/afterNav',
+    meta:{
+      name:'导航前路由',
+    },
+    component:afterNavigation,
+  },
+  {
+    name:'updateNav',
+    path:'/updateNav',
+    meta:{
+      name:'修改导航路由',
+    },
+    component:updateNavigation,
+    children:[
+      {
+        name:'child1',
+        path:'child1',
+        meta:{
+          name:'孩子1',
+        },
+        component:child1,
+      },
+      {
+        name:'child2',
+        path:'child2',
+        meta:{
+          name:'孩子2',
+        },
+        component:child2,
+      },
+    ]
+  },
 ]
 
 const myRoutes:RouteRecordRaw[] = [
