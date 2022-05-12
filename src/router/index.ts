@@ -12,7 +12,9 @@ const router = createRouter({
 //先全局守卫然后单个守卫
 //全局前置钩子   全局前置守卫
 router.beforeEach( (to, from,next) => {
-  if(to.meta.isLogin&&isLogin()||(!to.meta.requiresAuth&&isWriter())){
+  //先判断是否有两个属性值
+  if((to.meta.hasOwnProperty('isLogin') && to.meta.hasOwnProperty('requiresAuth'))
+    && (to.meta.isLogin&&isLogin()||(!to.meta.requiresAuth&&isWriter()))){
     next({name:'home'});
   }else{
     next();

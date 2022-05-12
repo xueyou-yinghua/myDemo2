@@ -6,7 +6,7 @@ const isLogin = ()=>{
 
 const isWriter = ()=>{
   const inform = localStorage.getItem('inform');
-  return inform === '2';
+  return inform !== '2';
 }
 
 export {

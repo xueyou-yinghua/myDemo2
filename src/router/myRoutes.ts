@@ -232,7 +232,31 @@ const routeMeta:RouteRecordRaw = {
       component:()=>import('../views/list/routeMeta/writer.vue'),
     },
   ]
-}
+};
+
+const beforeNavigation = ()=>import('../views/list/nav/beforeNav.vue');
+const afterNavigation = ()=>import('../views/list/nav/afterNav.vue');
+/**
+ * 8. 数据获取
+ *    有时候，进入某个路由后，需要从服务器获取数据。例如，在渲染用户信息时，你需要从服务器获取用户的数据。我们可以通过两种方式来实现：
+ *
+ * 导航完成之后获取：先完成导航，然后在接下来的组件生命周期钩子中获取数据。在数据获取期间显示“加载中”之类的指示。
+ *
+ * 导航完成之前获取：导航完成前，在路由进入的守卫中获取数据，在数据获取成功后执行导航。
+ *
+ * 从技术角度讲，两种方式都不错 —— 就看你想要的用户体验是哪种。
+ */
+const navs:RouteRecordRaw[] = [
+  {
+    name:'beforeNav',
+    path:'/beforeNav',
+    meta:{
+      name:'提前路由',
+    },
+    component:beforeNavigation,
+  },
+
+]
 
 const myRoutes:RouteRecordRaw[] = [
   home,
@@ -245,6 +269,7 @@ const myRoutes:RouteRecordRaw[] = [
   props,
   guards,
   routeMeta,
+  ...navs,
 ]
 
 export default myRoutes;
