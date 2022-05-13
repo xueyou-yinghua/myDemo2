@@ -14,9 +14,6 @@ const home:RouteRecordRaw = {
         name:'homepage'
       },*/
   component:()=>import('../views/sk-main/sk-main.vue'),
-  children:[
-
-  ]
 };
 
 /**
@@ -80,9 +77,17 @@ const manyPages_main1 = ()=>import('../views/list/manyPages/main1.vue');
  */
 const manyPages:RouteRecordRaw = {
   path:'/manyPages',
+  name:'manyPages',
+  meta:{
+    name:'多项页面',
+    childrenNamed:[
+      'lang',
+    ]
+  },
   component:manyPages_main,
   children:[
     {
+      name:'lang',
       path:'lang',
       components:{
         default:manyPages_center,
@@ -95,9 +100,17 @@ const manyPages:RouteRecordRaw = {
 const manyPages1:RouteRecordRaw = {
   path:'/manyPages1',
   component:manyPages_main1,
+  name:'manyPages1',
+  meta:{
+    name:'多项页面1',
+    childrenNamed:[
+      'lang1',
+    ]
+  },
   children:[
     {
       path:'lang1',
+      name:'lang1',
       components:{
         default:manyPages_right,
         center:manyPages_center,
@@ -113,6 +126,10 @@ const manyPages1:RouteRecordRaw = {
  */
 const props:RouteRecordRaw = {
   path:'/user/:id',
+  name:'props',
+  meta:{
+    name:'传参页面'
+  },
   component:()=>import('../views/list/props/user.vue'),
   props: {
     id: 123,
@@ -135,12 +152,18 @@ const guards:RouteRecordRaw = {
   name: 'guard',
   meta: {
     name: '守卫',
+    childrenNamed:[
+      'guard1',
+      'guard2',
+      'guard3',
+      'guard4'
+    ]
   },
   //实现以下1跳到2失败,2跳到3失败,3跳到1失败
   //1可以跳到3,,2可以跳到1,3可以跳到2
   children:[
     {
-      path: '/1',
+      path: '1',
       component: guard1,
       name: 'guard1',
       meta: {
@@ -153,7 +176,7 @@ const guards:RouteRecordRaw = {
       }
     },
     {
-      path: '/2',
+      path: '2',
       component: guard2,
       name: 'guard2',
       meta: {
@@ -166,7 +189,7 @@ const guards:RouteRecordRaw = {
       }
     },
     {
-      path: '/3',
+      path: '3',
       component: guard3,
       name: 'guard3',
       meta: {
@@ -180,7 +203,7 @@ const guards:RouteRecordRaw = {
       }
     },
     {
-      path: '/4',
+      path: '4',
       component: guard4,
       name: 'guard4',
       meta: {
@@ -200,12 +223,18 @@ const routeMeta:RouteRecordRaw = {
   meta:{
     name:'路由元首页',
     isLogin:false,
-    requiresAuth:true
+    requiresAuth:true,
+    childrenNamed:[
+      'home-works',
+      'home-user',
+      'home-writer'
+    ]
   },
   component:()=>import('../views/list/routeMeta/homepage.vue'),
   children:[
     {
       path:'works',
+      name:'home-works',
       meta:{
         name:'读者页面',
         isLogin:false,
@@ -215,6 +244,7 @@ const routeMeta:RouteRecordRaw = {
     },
     {
       path:'user',
+      name:'home-user',
       meta:{
         name:'用户个人页面',
         isLogin:true,
@@ -224,6 +254,7 @@ const routeMeta:RouteRecordRaw = {
     },
     {
       path:'writer',
+      name:'home-writer',
       meta:{
         name:'作者页面',
         isLogin:true,
@@ -272,6 +303,10 @@ const navs:RouteRecordRaw[] = [
     path:'/updateNav',
     meta:{
       name:'修改导航路由',
+      childrenNamed:[
+        'child1',
+        'child2',
+      ]
     },
     component:updateNavigation,
     children:[
@@ -304,6 +339,46 @@ const navs:RouteRecordRaw[] = [
 ]
 
 
+const oneTransition = ()=>import('../views/list/transition/oneTransition.vue');
+const one_one = ()=>import('../views/list/transition/one-one.vue');
+const routeTransition = ()=>import('../views/list/transition/one-two.vue');
+const one_two = ()=>import('../views/list/transition/one-two.vue');
+/**
+ * 9. 过渡动效
+ *
+ */
+const oneTrans:RouteRecordRaw = {
+  component: oneTransition,
+  meta: {
+    name:'单个路由过渡',
+    childrenNamed:[
+      'trans-one',
+      'trans-two',
+    ]
+  },
+  name: 'oneTransition',
+  path: "/oneTransition",
+  children:[
+    {
+      path:'trans-one',
+      name:'trans-one',
+      component:one_one,
+      meta:{
+        name:'过渡特效第一个页面',
+        transition:'slide-left',
+      }
+    },
+    {
+      path:'trans-two',
+      name:'trans-two',
+      component:one_two,
+      meta:{
+        name:'过渡特效第二个页面',
+        transition:'slide-right',
+      }
+    },
+  ]
+}
 
 
 
@@ -319,6 +394,7 @@ const myRoutes:RouteRecordRaw[] = [
   guards,
   routeMeta,
   ...navs,
+  oneTrans,
 ]
 
 export default myRoutes;
