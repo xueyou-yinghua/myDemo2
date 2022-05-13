@@ -237,6 +237,7 @@ const routeMeta:RouteRecordRaw = {
 const beforeNavigation = ()=>import('../views/list/nav/beforeNav.vue');
 const afterNavigation = ()=>import('../views/list/nav/afterNav.vue');
 const updateNavigation = ()=>import('../views/list/nav/updateNav.vue');
+const updateNavigation1 = ()=>import('../views/list/nav/updateNav1.vue');
 const child1 = ()=>import('../views/list/nav/children1.vue');
 const child2 = ()=>import('../views/list/nav/children2.vue');
 /**
@@ -292,7 +293,19 @@ const navs:RouteRecordRaw[] = [
       },
     ]
   },
+  {
+    name:'updateNav1',
+    path:'/updateNav1/:number(\\d+)',
+    meta:{
+      name:'修改单个路由',
+    },
+    component:updateNavigation1,
+  },
 ]
+
+
+
+
 
 const myRoutes:RouteRecordRaw[] = [
   home,

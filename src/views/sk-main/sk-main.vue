@@ -5,7 +5,7 @@ import {useRouter} from "vue-router";
 const router = useRouter();
 
 const click = ()=>{
-  router.push('/updateNav/child1')
+  router.push('/updateNav1/123')
 }
 </script>
 

@@ -2,8 +2,18 @@ import {createRouter, createWebHistory, RouteRecordRaw,RouteLocationNormalizedLo
 import myRoutes from "./myRoutes";
 import {isLogin, isWriter} from "./isLogin";
 
+/**
+ * 1. history 路由历史记录
+ * 2. linkActiveClass  默认:router-link-active
+ * 3. linkExactActiveClass  默认:router-link-exact-active
+ * 4. parseQuery 和 stringifyQuery构建选项
+ *    parseQuery 和 stringifyQuery构建选项用于提供query的解析/反解析函数。vue 会默认处理，如果有特定需求，可以借助这两个配置项。
+ * 5. routes  初始路由列表
+ * 6. scrollBehavior   页面之间导航时的滚动函数,可以返回一个Promise来延迟滚动
+ */
 const router = createRouter({
   history: createWebHistory(),
+  linkActiveClass:'sk-active-link',
   routes:myRoutes,
 });
 

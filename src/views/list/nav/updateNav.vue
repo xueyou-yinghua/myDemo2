@@ -68,8 +68,12 @@ onBeforeRouteUpdate(async (to,from) =>{
 
 
 <template>
-  <router-link to="/updateNav/child1" type="button">child1</router-link>
-  <router-link to="/updateNav/child2" type="button">child2</router-link>
+  <router-link to="/updateNav/child1">
+    <button>child1</button><p></p>
+  </router-link>
+  <router-link to="/updateNav/child2">
+    <button>child2</button>
+  </router-link>
   <p>{{params.data}}</p>
   <router-view v-if="params.data!==null&&judge"/>
   <Loading :is-watch="params.loading"></Loading>
